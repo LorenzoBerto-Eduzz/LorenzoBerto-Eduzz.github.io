@@ -46,8 +46,10 @@ body {
 }
 
 .container {
-  width: 100%;
-  padding: 2.5rem 1rem 4rem 0.75rem;
+  width: min(1180px, calc(100vw - 2.5rem));
+  margin-left: 1rem;
+  margin-right: 0;
+  padding: 2.5rem 0 4rem;
 }
 
 .hero {
@@ -70,8 +72,9 @@ h1 {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.45rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+  justify-content: start;
+  gap: 1.3rem;
 }
 
 .project-card {
@@ -114,7 +117,7 @@ h1 {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
   color: #10253d;
-  font-size: 1.45rem;
+  font-size: 1.3rem;
   line-height: 1.2;
 }
 
@@ -127,11 +130,13 @@ h1 {
 
 @media (max-width: 680px) {
   .container {
-    width: 100%;
-    padding: 2rem 0.8rem 3rem 0.6rem;
+    width: calc(100vw - 1.4rem);
+    margin-left: 0.7rem;
+    padding: 2rem 0 3rem;
   }
 
   .projects-grid {
+    grid-template-columns: 1fr;
     gap: 1.15rem;
   }
 }
