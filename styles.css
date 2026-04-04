@@ -46,22 +46,12 @@ body {
 }
 
 .container {
-  width: min(1180px, calc(100vw - 2rem));
-  margin: 0 auto;
-  padding: 2.5rem 0 4rem;
+  width: 100%;
+  padding: 2.5rem 1.2rem 4rem;
 }
 
 .hero {
-  margin-bottom: 1.6rem;
-}
-
-.eyebrow {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 0.82rem;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  margin: 0 0 0.65rem;
-  color: var(--accent);
+  margin-bottom: 1.9rem;
 }
 
 h1 {
@@ -70,23 +60,18 @@ h1 {
   line-height: 1.02;
 }
 
-.subtitle {
-  margin-top: 0.85rem;
+.byline {
+  margin-top: 0.55rem;
   margin-bottom: 0;
-  font-size: clamp(1rem, 2.4vw, 1.2rem);
+  font-size: 0.95rem;
   color: var(--muted);
-}
-
-.status {
   font-family: "Space Grotesk", sans-serif;
-  color: var(--muted);
-  margin-bottom: 1rem;
 }
 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.15rem;
+  gap: 1.45rem;
 }
 
 .project-card {
@@ -129,7 +114,7 @@ h1 {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
   color: #10253d;
-  font-size: 1.15rem;
+  font-size: 1.45rem;
   line-height: 1.2;
 }
 
@@ -142,11 +127,11 @@ h1 {
 
 @media (max-width: 680px) {
   .container {
-    width: min(1180px, calc(100vw - 1.25rem));
-    padding-top: 2rem;
+    width: 100%;
+    padding: 2rem 0.95rem 3rem;
   }
 
   .projects-grid {
-    gap: 0.95rem;
+    gap: 1.15rem;
   }
 }

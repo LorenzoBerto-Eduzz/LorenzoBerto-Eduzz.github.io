@@ -10,12 +10,8 @@ const EXTRA_PROJECTS = [
   // }
 ];
 
-const ownerNameEl = document.getElementById("owner-name");
-const statusEl = document.getElementById("status");
 const gridEl = document.getElementById("projects-grid");
 const cardTemplate = document.getElementById("project-card-template");
-
-ownerNameEl.textContent = GITHUB_USERNAME;
 
 function formatDescription(repo) {
   if (repo.description && repo.description.trim()) {
@@ -83,8 +79,6 @@ function createExtraCard(project) {
 }
 
 async function loadRepos() {
-  statusEl.textContent = "Loading projects...";
-
   try {
     const response = await fetch(GITHUB_API_URL, {
       headers: {
@@ -102,7 +96,6 @@ async function loadRepos() {
       .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
 
     if (visibleRepos.length === 0 && EXTRA_PROJECTS.length === 0) {
-      statusEl.textContent = "No public repositories found yet.";
       return;
     }
 
@@ -110,14 +103,7 @@ async function loadRepos() {
     visibleRepos.forEach((repo) => fragment.appendChild(createProjectCard(repo)));
     EXTRA_PROJECTS.forEach((project) => fragment.appendChild(createExtraCard(project)));
     gridEl.appendChild(fragment);
-
-    statusEl.textContent = `${visibleRepos.length + EXTRA_PROJECTS.length} project(s) found`;
   } catch (error) {
-    statusEl.textContent = "Could not load projects right now.";
-    const hint = document.createElement("p");
-    hint.className = "status";
-    hint.textContent = "Check if your username is correct in script.js and if repos are public.";
-    gridEl.appendChild(hint);
     console.error(error);
   }
 }
