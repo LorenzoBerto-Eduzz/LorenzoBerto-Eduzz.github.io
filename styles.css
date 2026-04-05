@@ -46,8 +46,8 @@ body {
 }
 
 .container {
-  width: min(1260px, calc(100vw - 5rem));
-  margin-left: 2rem;
+  width: min(1280px, calc(100vw - 8rem));
+  margin-left: 3rem;
   margin-right: 0;
   padding: 3.2rem 0 4.5rem;
 }
@@ -72,7 +72,7 @@ h1 {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 420px));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 500px));
   justify-content: start;
   gap: 1.55rem;
 }
@@ -86,7 +86,7 @@ h1 {
   border: 1px solid var(--border);
   background: var(--card);
   box-shadow: var(--shadow);
-  height: 420px;
+  height: 300px;
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
