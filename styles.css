@@ -48,39 +48,43 @@ body {
 }
 
 .container {
-  width: min(1320px, calc(100vw - 10rem));
-  margin-left: 4rem;
+  --content-offset: 0.46rem;
+  width: min(1300px, calc(100vw - 11rem));
+  margin-left: 4.6rem;
   margin-right: 0;
-  padding: 3.2rem 0 4.5rem;
+  padding: 3.35rem 0 4.6rem;
   position: relative;
   z-index: 1;
 }
 
 .hero {
-  margin-bottom: 1.9rem;
-  margin-left: 0.35rem;
+  margin-bottom: 2rem;
+  margin-left: var(--content-offset);
 }
 
 h1 {
   margin: 0;
   font-size: clamp(2rem, 6vw, 3.7rem);
   line-height: 1.02;
+  letter-spacing: -0.01em;
 }
 
 .byline {
-  margin-top: 0.82rem;
-  margin-left: 0.12rem;
+  margin-top: 0.92rem;
+  margin-left: 0.3rem;
   margin-bottom: 0;
   font-size: 0.95rem;
   color: var(--muted);
   font-family: "Space Grotesk", sans-serif;
+  line-height: 1.18;
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 450px));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 440px));
   justify-content: start;
-  gap: 1.45rem;
+  gap: 1.35rem 1.45rem;
+  margin-left: var(--content-offset);
 }
 
 .project-card {
@@ -118,6 +122,9 @@ h1 {
 .project-meta {
   min-height: 98px;
   padding: 0.85rem 1.05rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .project-name {
@@ -141,8 +148,8 @@ h1 {
 
 @media (max-width: 680px) {
   .container {
-    width: calc(100vw - 2.8rem);
-    margin-left: 1.4rem;
+    width: calc(100vw - 3.2rem);
+    margin-left: 1.6rem;
     padding: 2.35rem 0 3.1rem;
   }
 
@@ -150,8 +157,13 @@ h1 {
     margin-left: 0;
   }
 
+  .byline {
+    margin-left: 0.12rem;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.15rem;
+    margin-left: 0;
   }
 }
