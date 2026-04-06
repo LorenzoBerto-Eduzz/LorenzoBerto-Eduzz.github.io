@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Lightbulb icon">
+  <circle cx="32" cy="32" r="30" fill="#143047"/>
+  <path d="M32 13c-8.4 0-15.2 6.8-15.2 15.2 0 5.7 3.1 10.7 7.8 13.3 1.2.7 2 2 2 3.4v1.3h10.8V45c0-1.4.8-2.7 2-3.4 4.7-2.6 7.8-7.6 7.8-13.3C47.2 19.8 40.4 13 32 13Z" fill="#ffffff"/>
+  <rect x="25.4" y="47.7" width="13.2" height="4.4" rx="2.2" fill="#ffffff"/>
+  <rect x="26.8" y="53.4" width="10.4" height="3.6" rx="1.8" fill="#ffffff"/>
+</svg>

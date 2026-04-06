@@ -1,15 +1,6 @@
 const GITHUB_USERNAME = "LorenzoBerto-Eduzz";
 const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?type=owner&sort=updated&per_page=100`;
 const EXCLUDED_REPOS = new Set([`${GITHUB_USERNAME}.github.io`.toLowerCase()]);
-const EXTRA_PROJECTS = [
-  {
-    name: "TicketHelper",
-    description: "Chrome extension to help with ticket/chat workflow",
-    url: "https://github.com/LorenzoBerto-Eduzz/TicketHelper",
-    image: "https://raw.githubusercontent.com/LorenzoBerto-Eduzz/TicketHelper/main/image.png",
-    fallbackImage: "https://opengraph.githubassets.com/latest/LorenzoBerto-Eduzz/TicketHelper"
-  }
-];
 
 const gridEl = document.getElementById("projects-grid");
 const cardTemplate = document.getElementById("project-card-template");
@@ -72,28 +63,6 @@ function createProjectCard(repo) {
   return node;
 }
 
-function createExtraCard(project) {
-  const node = cardTemplate.content.firstElementChild.cloneNode(true);
-  const imgEl = node.querySelector(".project-image");
-  const nameEl = node.querySelector(".project-name");
-  const descEl = node.querySelector(".project-desc");
-
-  node.href = project.url;
-  node.title = `Open ${project.name}`;
-
-  nameEl.textContent = formatProjectName(project.name);
-  descEl.textContent = project.description || "External project";
-
-  imgEl.alt = `${project.name} preview`;
-  if (!project.image && !project.fallbackImage) {
-    imgEl.style.display = "none";
-  } else {
-    setCardImage(imgEl, project.image || project.fallbackImage, project.fallbackImage);
-  }
-
-  return node;
-}
-
 async function loadRepos() {
   let visibleRepos = [];
 
@@ -122,18 +91,8 @@ async function loadRepos() {
   }
 
   const fragment = document.createDocumentFragment();
-  const seenUrls = new Set();
-
   visibleRepos.forEach((repo) => {
-    seenUrls.add(repo.html_url.toLowerCase());
     fragment.appendChild(createProjectCard(repo));
-  });
-
-  EXTRA_PROJECTS.forEach((project) => {
-    if (seenUrls.has(project.url.toLowerCase())) {
-      return;
-    }
-    fragment.appendChild(createExtraCard(project));
   });
 
   if (!fragment.childElementCount) {
