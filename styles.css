@@ -68,7 +68,7 @@ h1 {
 }
 
 .byline {
-  margin-top: 0.55rem;
+  margin-top: 0.82rem;
   margin-bottom: 0;
   font-size: 0.95rem;
   color: var(--muted);
@@ -77,9 +77,9 @@ h1 {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 520px));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 470px));
   justify-content: start;
-  gap: 1.55rem;
+  gap: 1.45rem;
 }
 
 .project-card {
@@ -115,7 +115,7 @@ h1 {
 }
 
 .project-meta {
-  min-height: 118px;
+  min-height: 112px;
   padding: 1rem 1.1rem 1.15rem;
 }
 
@@ -123,12 +123,12 @@ h1 {
   margin: 0;
   font-family: "Space Grotesk", sans-serif;
   color: #10253d;
-  font-size: 1.52rem;
+  font-size: 1.64rem;
   line-height: 1.2;
 }
 
 .project-desc {
-  margin: 0.45rem 0 0;
+  margin: 0.7rem 0 0;
   color: #54677b;
   font-size: 0.95rem;
   line-height: 1.38;
