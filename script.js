@@ -14,6 +14,10 @@ const EXTRA_PROJECTS = [
 const gridEl = document.getElementById("projects-grid");
 const cardTemplate = document.getElementById("project-card-template");
 
+function formatProjectName(name) {
+  return String(name || "").replace(/-/g, " ").trim();
+}
+
 function formatDescription(repo) {
   if (repo.description && repo.description.trim()) {
     return repo.description;
@@ -59,7 +63,7 @@ function createProjectCard(repo) {
   node.href = repo.html_url;
   node.title = `Open ${repo.name}`;
 
-  nameEl.textContent = repo.name;
+  nameEl.textContent = formatProjectName(repo.name);
   descEl.textContent = formatDescription(repo);
 
   imgEl.alt = `${repo.name} preview`;
@@ -77,7 +81,7 @@ function createExtraCard(project) {
   node.href = project.url;
   node.title = `Open ${project.name}`;
 
-  nameEl.textContent = project.name;
+  nameEl.textContent = formatProjectName(project.name);
   descEl.textContent = project.description || "External project";
 
   imgEl.alt = `${project.name} preview`;
