@@ -6,7 +6,8 @@ const EXTRA_PROJECTS = [
     name: "TicketHelper",
     description: "Chrome extension to help with ticket/chat workflow",
     url: "https://github.com/LorenzoBerto-Eduzz/TicketHelper",
-    image: "https://opengraph.githubassets.com/latest/LorenzoBerto-Eduzz/TicketHelper"
+    image: "https://raw.githubusercontent.com/LorenzoBerto-Eduzz/TicketHelper/main/image.png",
+    fallbackImage: "https://opengraph.githubassets.com/latest/LorenzoBerto-Eduzz/TicketHelper"
   }
 ];
 
@@ -30,6 +31,25 @@ function buildPreviewImageUrl(repo) {
   return `https://opengraph.githubassets.com/${cacheKey}/${GITHUB_USERNAME}/${repo.name}`;
 }
 
+function buildRepoImageUrl(repo) {
+  const defaultBranch = repo.default_branch || "main";
+  return `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/${defaultBranch}/image.png`;
+}
+
+function setCardImage(imgEl, primaryImageUrl, fallbackImageUrl) {
+  imgEl.loading = "lazy";
+  imgEl.src = primaryImageUrl;
+
+  imgEl.onerror = () => {
+    if (fallbackImageUrl && imgEl.dataset.fallbackApplied !== "true") {
+      imgEl.dataset.fallbackApplied = "true";
+      imgEl.src = fallbackImageUrl;
+      return;
+    }
+    imgEl.style.display = "none";
+  };
+}
+
 function createProjectCard(repo) {
   const node = cardTemplate.content.firstElementChild.cloneNode(true);
   const imgEl = node.querySelector(".project-image");
@@ -42,12 +62,8 @@ function createProjectCard(repo) {
   nameEl.textContent = repo.name;
   descEl.textContent = formatDescription(repo);
 
-  imgEl.loading = "lazy";
   imgEl.alt = `${repo.name} preview`;
-  imgEl.src = buildPreviewImageUrl(repo);
-  imgEl.onerror = () => {
-    imgEl.style.display = "none";
-  };
+  setCardImage(imgEl, buildRepoImageUrl(repo), buildPreviewImageUrl(repo));
 
   return node;
 }
@@ -64,15 +80,11 @@ function createExtraCard(project) {
   nameEl.textContent = project.name;
   descEl.textContent = project.description || "External project";
 
-  imgEl.loading = "lazy";
   imgEl.alt = `${project.name} preview`;
-  imgEl.src = project.image || "";
-  imgEl.onerror = () => {
+  if (!project.image && !project.fallbackImage) {
     imgEl.style.display = "none";
-  };
-
-  if (!project.image) {
-    imgEl.style.display = "none";
+  } else {
+    setCardImage(imgEl, project.image || project.fallbackImage, project.fallbackImage);
   }
 
   return node;
