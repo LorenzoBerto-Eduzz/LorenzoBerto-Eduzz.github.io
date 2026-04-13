@@ -79,6 +79,35 @@ h1 {
   line-height: 1.18;
 }
 
+.byline-link {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.byline-link:visited {
+  color: var(--muted);
+}
+
+.byline-link::after {
+  content: "";
+  display: block;
+  margin-top: 0.36rem;
+  width: 100%;
+  height: 1px;
+  background: rgba(98, 109, 121, 0.55);
+  transition: background-color 180ms ease;
+}
+
+.byline-link:hover {
+  cursor: pointer;
+}
+
+.byline-link:hover::after {
+  background: rgba(70, 82, 95, 0.85);
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 440px));
