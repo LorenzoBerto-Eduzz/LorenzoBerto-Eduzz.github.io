@@ -79,12 +79,18 @@ h1 {
   line-height: 1.18;
 }
 
+.byline-prefix {
+  margin-right: 0.28rem;
+}
+
 .byline-link {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.26rem;
-  text-decoration: none;
+  display: inline;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(98, 109, 121, 0.52);
   color: var(--muted);
+  transition: text-decoration-color 180ms ease;
 }
 
 .byline-link:visited {
@@ -93,18 +99,7 @@ h1 {
 
 .byline-link:hover {
   cursor: pointer;
-}
-
-.byline-name {
-  display: inline-block;
-  line-height: 1;
-  padding-bottom: 0.08rem;
-  border-bottom: 1px solid rgba(98, 109, 121, 0.52);
-  transition: border-color 180ms ease;
-}
-
-.byline-link:hover .byline-name {
-  border-bottom-color: rgba(70, 82, 95, 0.82);
+  text-decoration-color: rgba(70, 82, 95, 0.82);
 }
 
 .projects-grid {
