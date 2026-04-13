@@ -80,8 +80,9 @@ h1 {
 }
 
 .byline-link {
-  display: inline-block;
-  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.26rem;
   text-decoration: none;
   color: var(--muted);
 }
@@ -90,22 +91,20 @@ h1 {
   color: var(--muted);
 }
 
-.byline-link::after {
-  content: "";
-  display: block;
-  margin-top: 0.36rem;
-  width: 100%;
-  height: 1px;
-  background: rgba(98, 109, 121, 0.55);
-  transition: background-color 180ms ease;
-}
-
 .byline-link:hover {
   cursor: pointer;
 }
 
-.byline-link:hover::after {
-  background: rgba(70, 82, 95, 0.85);
+.byline-name {
+  display: inline-block;
+  line-height: 1;
+  padding-bottom: 0.08rem;
+  border-bottom: 1px solid rgba(98, 109, 121, 0.52);
+  transition: border-color 180ms ease;
+}
+
+.byline-link:hover .byline-name {
+  border-bottom-color: rgba(70, 82, 95, 0.82);
 }
 
 .projects-grid {
