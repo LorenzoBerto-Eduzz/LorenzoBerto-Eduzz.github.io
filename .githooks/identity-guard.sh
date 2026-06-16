@@ -1,43 +1,31 @@
 #!/bin/sh
 
-EXPECTED_EMAIL="lorenzo.berto@eduzz.com"
-EXPECTED_GITHUB_ACCOUNT="LorenzoBerto-Eduzz"
+identity_file=".git-identity"
 
-current_email="$(git config user.email)"
-
-if [ "$current_email" != "$EXPECTED_EMAIL" ]; then
-  echo "Blocked: Git user.email is '$current_email', expected '$EXPECTED_EMAIL'."
-  echo "Fix with: git config user.email \"$EXPECTED_EMAIL\""
+if [ ! -f "$identity_file" ]; then
+  echo "Git identity guard blocked this action: missing $identity_file." >&2
+  echo "Create it with GIT_ALLOWED_EMAIL for this project." >&2
   exit 1
 fi
 
-author_ident="$(git var GIT_AUTHOR_IDENT 2>/dev/null || true)"
-committer_ident="$(git var GIT_COMMITTER_IDENT 2>/dev/null || true)"
+# shellcheck disable=SC1090
+. "./$identity_file"
 
-case "$author_ident" in
-  *"<$EXPECTED_EMAIL>"*) ;;
-  *)
-    echo "Blocked: Git author identity must use '$EXPECTED_EMAIL'."
-    echo "Current author: $author_ident"
-    exit 1
-    ;;
-esac
-
-case "$committer_ident" in
-  *"<$EXPECTED_EMAIL>"*) ;;
-  *)
-    echo "Blocked: Git committer identity must use '$EXPECTED_EMAIL'."
-    echo "Current committer: $committer_ident"
-    exit 1
-    ;;
-esac
-
-if command -v gh >/dev/null 2>&1; then
-  if ! gh auth status 2>&1 | grep -q "account $EXPECTED_GITHUB_ACCOUNT"; then
-    echo "Blocked: GitHub CLI is not authenticated as '$EXPECTED_GITHUB_ACCOUNT'."
-    echo "Fix with: gh auth login"
-    exit 1
-  fi
+if [ -z "$GIT_ALLOWED_EMAIL" ] ||
+   [ "$GIT_ALLOWED_EMAIL" = "THE_EMAIL_I_GIVE" ]; then
+  echo "Git identity guard blocked this action: configure $identity_file first." >&2
+  echo "Set the one allowed Git email for this project." >&2
+  exit 1
 fi
 
-exit 0
+current_name="$(git config user.name)"
+current_email="$(git config user.email)"
+
+if [ "$current_email" != "$GIT_ALLOWED_EMAIL" ]; then
+  echo "Git identity guard blocked this action." >&2
+  echo "Allowed email: $GIT_ALLOWED_EMAIL" >&2
+  echo "Current: ${current_name:-<empty>} <${current_email:-<empty>}>" >&2
+  echo "Run:" >&2
+  echo "  git config user.email \"$GIT_ALLOWED_EMAIL\"" >&2
+  exit 1
+fi

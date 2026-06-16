@@ -1,1 +1,3 @@
 .githooks/* text eol=lf
+.git-identity text eol=lf
+AGENTS.md text eol=lf
